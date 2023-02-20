@@ -18,7 +18,7 @@
                                 All Categories
                             </div>
                             <div class="col-md-6">
-                                <a href="#" class="btn btn-success pull-right">Add New</a>
+                                <a href="{{ route('admin.addcategory') }}" class="btn btn-success pull-right">Add New</a>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,16 @@
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
-                                        <td></td>
+                                        <td><a href="#"
+                                                wire:click.prevent="deleteCategory({{ $category->id }})"><i
+                                                    class="fa fa-times fa-2x text-danger"
+                                                    style="margin-left:10px;"></i></a>
+                                            <a
+                                                href="{{ route('admin.editcategory', ['category_slug' => $category->slug]) }}"><i
+                                                    class="fa fa-edit fa-2x" style="margin-left:10px;"></i></a>
+                                        </td>
+
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

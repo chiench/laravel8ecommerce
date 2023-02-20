@@ -20,6 +20,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"
+        integrity="sha512-cOGz9gyEibwgs1MVDCcfmQv6mPyUkfvrV9TsRbTuOA12SQnLzBROihf6/jK57u0YxzlxosBFunSt4V75K6azMw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     @livewireStyles
 </head>
 
@@ -63,6 +68,19 @@
                                                     <li class="menu-item">
                                                         <a title="Categories"
                                                             href="{{ route('admin.categories') }}">Categories</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a title="All Products" href="{{ route('admin.products') }}">All
+                                                            Products</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a title="Manage Home Slider"
+                                                            href="{{ route('admin.homeslider') }}">Manage Home Slider</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a title="Manage Home Categories"
+                                                            href="{{ route('admin.homecategories') }}">Manage Home
+                                                            Categories</a>
                                                     </li>
 
 
@@ -562,7 +580,16 @@
         <script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
         <script src="{{ asset('assets/js/functions.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
+            integrity="sha512-CryKbMe7sjSCDPl18jtJI5DR5jtkUWxPXWaLCst6QjH8wxDexfRJic2WRmRXmstr2Y8SxDDWuBO6CQC6IE4KTA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"
+            integrity="sha512-PDFb+YK2iaqtG4XelS5upP1/tFSmLUVJ/BVL8ToREQjsuXC5tyqEfAQV7Ca7s8b7RLHptOmTJak9jxlA2H9xQA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
         @livewireScripts
+        @stack('scripts')
     </body>
 
     </html>

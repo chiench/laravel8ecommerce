@@ -20,11 +20,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.css"
+        integrity="sha512-qveKnGrvOChbSzAdtSs8p69eoLegyh+1hwOMbmpCViIwj7rn4oJjdmMvWOuyQlTOZgTlZA0N2PXA7iA8/2TUYA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css"
         integrity="sha512-cOGz9gyEibwgs1MVDCcfmQv6mPyUkfvrV9TsRbTuOA12SQnLzBROihf6/jK57u0YxzlxosBFunSt4V75K6azMw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tiny.cloud/1/zmuvezczjzsn0654mumu5wqn22m0audhm39t8wxr0j4gpvlb/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
     @livewireStyles
 </head>
 
@@ -82,6 +87,9 @@
                                                             href="{{ route('admin.homecategories') }}">Manage Home
                                                             Categories</a>
                                                     </li>
+                                                    <li>
+                                                        <a href="{{ route('admin.onsale') }}">Manage Sale</a>
+                                                    </li>
 
 
 
@@ -109,7 +117,8 @@
                                                         <a href="{{ route('logout') }}"
                                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                                     </li>
-                                                    <form id="logout-form" method="POST" action="{{ route('logout') }}">
+                                                    <form id="logout-form" method="POST"
+                                                        action="{{ route('logout') }}">
                                                         @csrf
                                                     </form>
                                                 </ul>
@@ -179,26 +188,11 @@
                             @livewire('header-search-component')
 
                             <div class="wrap-icon right-section">
-                                <div class="wrap-icon-section wishlist">
-                                    <a href="#" class="link-direction">
-                                        <i class="fa fa-heart" aria-hidden="true"></i>
-                                        <div class="left-info">
-                                            <span class="index">0 item</span>
-                                            <span class="title">Wishlist</span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="wrap-icon-section minicart">
-                                    <a href="/" class="link-direction">
-                                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                        <div class="left-info">
-                                            @if (Cart::instance('cart')->count() > 0)
-                                                <span class="index">{{ Cart::instance('cart')->count() }} items</span>
-                                            @endif
-                                            <span class="title">CART</span>
-                                        </div>
-                                    </a>
-                                </div>
+                                @livewire('whishlist-count-component')
+
+                                @livewire('cart-count-component')
+
+
                                 <div class="wrap-icon-section show-up-after-1024">
                                     <a href="#" class="mobile-navigation">
                                         <span></span>
@@ -585,6 +579,9 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"
             integrity="sha512-PDFb+YK2iaqtG4XelS5upP1/tFSmLUVJ/BVL8ToREQjsuXC5tyqEfAQV7Ca7s8b7RLHptOmTJak9jxlA2H9xQA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.0/nouislider.min.js"
+            integrity="sha512-UOJe4paV6hYWBnS0c9GnIRH8PLm2nFK22uhfAvsTIqd3uwnWsVri1OPn5fJYdLtGY3wB11LGHJ4yPU1WFJeBYQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 

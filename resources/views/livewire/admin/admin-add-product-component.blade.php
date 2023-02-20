@@ -185,30 +185,30 @@
     </div>
 </div>
 
-{{-- @push('scripts')
+@push('scripts')
     <script>
-        $(function(){
+        $(function() {
             tinymce.init({
-                selector:'#short_description',
-                setup:function(editor){
-                    editor.on('Change',function(e){
+                selector: '#short_description',
+                setup: function(editor) {
+                    editor.on('Change', function(e) {
                         tinyMCE.triggerSave();
                         var sd_data = $('#short_description').val();
-                        @this.set('short_description',sd_data);
+                        @this.set('short_description', sd_data);
                     });
                 }
             });
 
             tinymce.init({
-                selector:'#description',
-                setup:function(editor){
-                    editor.on('Change',function(e){
+                selector: '#description',
+                setup: function(editor) {
+                    editor.on('Change', function(e) {
                         tinyMCE.triggerSave();
                         var d_data = $('#description').val();
-                        @this.set('description',d_data);
+                        @this.set('description', d_data);
                     });
                 }
             });
         });
     </script>
-@endpush --}}
+@endpush

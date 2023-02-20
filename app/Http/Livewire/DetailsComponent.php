@@ -3,19 +3,34 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use App\Models\Sale;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
 class DetailsComponent extends Component
-{public $slug;
+{
+    public $slug;
+    public $qty=1;
 
+    public function increaseQuantity()
+    {
+        $this->qty++;
+    }
+
+    public function decreseQuantity()
+    {
+        if($this->qty > 1)
+        {
+            $this->qty--;
+        }
+    }
     public function mount($slug)
     {
         $this->slug = $slug;
     }
     public function store($product_id,$product_name,$product_price)
     {
-        Cart::instance('cart')->add($product_id,$product_name,1,$product_price)->associate('App\Models\Product');
+        Cart::instance('cart')->add($product_id,$product_name,$this->qty,$product_price)->associate('App\Models\Product');
         session()->flash('success_message','Item added in Cart');
         return redirect()->route('product.cart');
     }
@@ -25,6 +40,7 @@ class DetailsComponent extends Component
         $product = Product::where('slug',$this->slug)->first();
         $related_products = Product::where('category_id',$product->category_id)->inRandomOrder()->limit(5)->get();
         $popular_products = Product::inRandomOrder()->limit(4)->get();
-        return view('livewire.details-component',['product'=>$product,'related_products'=>$related_products,'popular_products'=>$popular_products])->layout('layouts.base');
+        $sale = Sale::find(1);
+        return view('livewire.details-component',['sale' => $sale,'product'=>$product,'related_products'=>$related_products,'popular_products'=>$popular_products])->layout('layouts.base');
     }
 }

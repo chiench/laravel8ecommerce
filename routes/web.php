@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\CartComponent;
@@ -25,12 +27,24 @@ Route::get('/shop',ShopComponent::class);
 Route::get('/cart',CartComponent::class);
 Route::get('/checkout',CheckoutComponent::class);
 
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
+// Route for Admin
 Route::middleware([
     'auth:sanctum',
+    'authadmin',
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/admin/dashboard',AdminDashboardComponent::class)->name('admin.dashboard');
 });
+Route::middleware(['auth:sanctum','verified'])->group(function(){
+    Route::get('/user/dashboard',UserDashboardComponent::class)->name('user.dashboard');
+    });

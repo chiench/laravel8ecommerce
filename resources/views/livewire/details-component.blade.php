@@ -71,7 +71,7 @@
                         @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
                             <div class="wrap-price">
                                 <span class="product-price">${{ $product->sale_price }}</span>
-                                <del><span class="product-price regprice">${{ $product->regular_price }}</span></del>
+                                <del> <span>${{ $product->regular_price }}</span> </del>
                             </div>
                         @else
                             <div class="wrap-price"><span class="product-price">${{ $product->regular_price }}</span>
@@ -80,6 +80,30 @@
                         <div class="stock-info in-stock">
                             <p class="availability">Availability: <b>{{ $product->stock_status }}</b></p>
                         </div>
+
+                        <div>
+                            @foreach ($product->attributeValues->unique('product_attribute_id') as $item)
+                                <div class="row" style="margin-top: 20px">
+                                    <div class="col-xs-2">
+                                        <p>{{ $item->productAttribute->name }}</p>
+                                    </div>
+                                    <div class="col-xs-10">
+                                        <select name="" id="" class="form-control" style="width: 200px"
+                                            wire:model="sattr.{{ $item->productAttribute->name }}">
+                                            @foreach ($item->productAttribute->attributeValues->where('product_id', $product->id) as $item)
+                                                <option value="{{ $item->value }}">{{ $item->value }}</option>
+                                            @endforeach
+                                        </select>
+
+
+                                    </div>
+
+                                </div>
+                            @endforeach
+                        </div>
+
+
+
                         <div class="quantity">
                             <span>Quantity:</span>
                             <div class="quantity-input">

@@ -179,6 +179,47 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Product Attribute</label>
+                                <div class="col-md-4">
+                                    <select class="form-control" wire:model="attr">
+                                        <option value="">Select Category</option>
+                                        @foreach ($pattribute as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" wire:click.prevent="addAttribute"
+                                        class="btn btn-primary">Add
+                                    </button>
+                                </div>
+                            </div>
+                            @foreach ($inputs as $key => $item)
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Attribute
+                                        {{ $pattribute->where('id', $attr_arr[$key])->first()->name }}</label>
+                                    <div class="col-md-4">
+                                        <input type="text"
+                                            placeholder=" {{ $pattribute->where('id', $attr_arr[$key])->first()->name }}"
+                                            class="form-control input-md"
+                                            wire:model="attr_value.{{ $item }}" />
+                                        @error('SKU')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="button"
+                                            wire:click.prevent="removeAttribute({{ $key }})"
+                                            class="btn btn-danger">Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            @endforeach
+
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>

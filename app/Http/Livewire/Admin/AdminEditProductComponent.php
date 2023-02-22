@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\AttributeValue;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductAttribute;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -30,6 +32,11 @@ class AdminEditProductComponent extends Component
     public $images;
     public $newimages;
 
+    public $attr;
+    public $inputs = [];
+    public $attr_arr = [];
+    public $attr_value;
+
     public function mount($product_slug)
     {
         $product = Product::where('slug',$product_slug)->first();
@@ -47,6 +54,33 @@ class AdminEditProductComponent extends Component
         $this->images = explode(",",$product->images);
         $this->category_id = $product->category_id;
         $this->product_id = $product->id;
+        $this->inputs = $product->attributeValues->where('product_id', $product->id)->unique('product_attribute_id')->pluck('product_attribute_id');
+        $this->attr_arr = $product->attributeValues->where('product_id', $product->id)->unique('product_attribute_id')->pluck('product_attribute_id');
+
+        foreach($this->attr_arr as $item)
+        {
+            $data = AttributeValue::where('product_id', $product->id)->where('product_attribute_id', $item)->get()->pluck('value');
+            $var = '';
+            foreach($data as $value)
+            {
+                $var = $var . $value . ',';
+
+            }
+            $this->attr_value[$item] = rtrim($var, ",");
+        }
+    }
+
+    public function addAttribute()
+    {
+        if(!$this->attr_arr->contains( $this->attr))
+        {
+            $this->inputs->push($this->attr);
+            $this->attr_arr->push($this->attr);
+        }
+    }
+    public function removeAttribute($attr)
+    {
+        unset($this->inputs[$attr]);
     }
 
     public function generateSlug()
@@ -143,12 +177,30 @@ class AdminEditProductComponent extends Component
 
         $product->category_id = $this->category_id;
         $product->save();
+        AttributeValue::where('product_id', $product->id)->delete();
+        foreach($this->attr_value as $key => $attr)
+        {
+
+            $data = explode(",", $attr);
+            foreach($data as $item)  {
+
+                $attr = new AttributeValue();
+                $attr->value = $item;
+                $attr->product_id = $product->id;
+                $attr->product_attribute_id = $key;
+                $attr->save();
+            }
+
+        }
+
+
         session()->flash('message','Product has been updated successfully!');
     }
 
     public function render()
     {
         $categories = Category::all();
-        return view('livewire.admin.admin-edit-product-component',['categories'=>$categories])->layout('layouts.base');
+        $pattribute = ProductAttribute::all();
+        return view('livewire.admin.admin-edit-product-component',['pattribute' =>$pattribute,'categories'=>$categories])->layout('layouts.base');
     }
 }

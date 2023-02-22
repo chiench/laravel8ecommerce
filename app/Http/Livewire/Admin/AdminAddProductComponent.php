@@ -109,10 +109,10 @@ class AdminAddProductComponent extends Component
 
 
         $product->save();
-        foreach($this->attr_value as $key => $item)
+        foreach($this->attr_value as $key => $attr)
         {
 
-            $data = explode(",", $item);
+            $data = explode(",", $attr);
             foreach($data as $item)  {
 
                 $attr = new AttributeValue();

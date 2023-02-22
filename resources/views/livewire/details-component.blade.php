@@ -19,20 +19,47 @@
                                     <img src="{{ asset('assets/images/products') }}/{{ $product->image }}"
                                         alt="{{ $product->name }}" />
                                 </li>
+                                @php
+                                    $images = explode(',', $product->images);
+                                @endphp
+                                @foreach ($images as $image)
+                                    @if ($image)
+                                        <li data-thumb="{{ asset('assets/images/products') }}/{{ $image }}">
+                                            <img src="{{ asset('assets/images/products') }}/{{ $image }}"
+                                                alt="{{ $product->name }}" />
+                                        </li>
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                     <div class="detail-info">
-
                         <div class="product-rating">
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <a href="#" class="count-review">(05 review)</a>
-                        </div>
+                            <style>
+                                .color-gray {
+                                    color: #e6e6e6 !important;
+                                }
+                            </style>
 
+                            @php
+                                $avgrating = 0;
+                            @endphp
+                            @foreach ($product->orderItems->where('rstatus', 1) as $orderItem)
+                                @php
+                                    $avgrating = $avgrating + $orderItem->review->rating;
+                                @endphp
+                            @endforeach
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $avgrating)
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                @else
+                                    <i class="fa fa-star color-gray" aria-hidden="true"></i>
+                                @endif
+                            @endfor
+                            <a href="#"
+                                class="count-review">({{ $product->orderItems->where('rstatus', 1)->count() }}
+                                review)</a>
+                        </div>
                         <h2 class="product-name">{{ $product->name }}</h2>
                         <div class="short-desc">
                             {!! $product->short_description !!}
@@ -41,37 +68,18 @@
                             <a class="link-socail" href="#"><img
                                     src="{{ asset('assets/images/social-list.png') }}" alt=""></a>
                         </div>
-                        <style>
-                            .salep {
-                                font-family: 'Lato', san-serif;
-                                font-weight: 300;
-                                font-size: 13px !important;
-                                color: #aaaaaa !important;
-                                text-decoration: line-through;
-                                padding-left: 10px;
-                            }
-
-                            .wrap-price .price-left {
-                                margin-left: 10px;
-                            }
-                        </style>
-                        @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > \Carbon\Carbon::now())
+                        @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
                             <div class="wrap-price">
                                 <span class="product-price">${{ $product->sale_price }}</span>
-                                <del class=" price-left"><span
-                                        class="">${{ $product->regular_price }}</span></del>
+                                <del><span class="product-price regprice">${{ $product->regular_price }}</span></del>
                             </div>
                         @else
                             <div class="wrap-price"><span class="product-price">${{ $product->regular_price }}</span>
                             </div>
                         @endif
-
-
-
                         <div class="stock-info in-stock">
                             <p class="availability">Availability: <b>{{ $product->stock_status }}</b></p>
                         </div>
-
                         <div class="quantity">
                             <span>Quantity:</span>
                             <div class="quantity-input">
@@ -82,7 +90,6 @@
                             </div>
                         </div>
                         <div class="wrap-butons">
-
                             @if ($product->sale_price > 0 && $sale->status == 1 && $sale->sale_date > Carbon\Carbon::now())
                                 <a href="#" class="btn add-to-cart"
                                     wire:click.prevent="store({{ $product->id }},'{{ $product->name }}',{{ $product->sale_price }})">Add
@@ -159,7 +166,41 @@
 
 
                                     <div id="comments">
-
+                                        <h2 class="woocommerce-Reviews-title">
+                                            {{ $product->orderItems->where('rstatus', 1)->count() }} review for
+                                            <span>{{ $product->name }}</span>
+                                        </h2>
+                                        <ol class="commentlist">
+                                            @foreach ($product->orderItems->where('rstatus', 1) as $orderItem)
+                                                <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1"
+                                                    id="li-comment-20">
+                                                    <div id="comment-20" class="comment_container">
+                                                        <img alt=""
+                                                            src="{{ asset('assets/images/profile') }}/{{ $orderItem->order->user->profile->image }}"
+                                                            height="80" width="80">
+                                                        <div class="comment-text">
+                                                            <div class="star-rating">
+                                                                <span
+                                                                    class="width-{{ $orderItem->review->rating * 20 }}-percent">Rated
+                                                                    <strong
+                                                                        class="rating">{{ $orderItem->review->rating }}</strong>
+                                                                    out of 5</span>
+                                                            </div>
+                                                            <p class="meta">
+                                                                <strong
+                                                                    class="woocommerce-review__author">{{ $orderItem->order->user->name }}</strong>
+                                                                <span class="woocommerce-review__dash">–</span>
+                                                                <time class="woocommerce-review__published-date"
+                                                                    datetime="2008-02-14 20:00">{{ Carbon\Carbon::parse($orderItem->review->created_at)->format('d F Y g:i A') }}</time>
+                                                            </p>
+                                                            <div class="description">
+                                                                <p>{{ $orderItem->review->comment }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ol>
                                     </div><!-- #comments -->
 
                                 </div>

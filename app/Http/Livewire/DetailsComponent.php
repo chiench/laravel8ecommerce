@@ -41,6 +41,7 @@ class DetailsComponent extends Component
         $related_products = Product::where('category_id',$product->category_id)->inRandomOrder()->limit(5)->get();
         $popular_products = Product::inRandomOrder()->limit(4)->get();
         $sale = Sale::find(1);
+
         return view('livewire.details-component',['sale' => $sale,'product'=>$product,'related_products'=>$related_products,'popular_products'=>$popular_products])->layout('layouts.base');
     }
 }

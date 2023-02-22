@@ -63,10 +63,9 @@
                                                 href="{{ route('admin.editproduct_attributes', ['product_attribute_name' => $item->name]) }}"><i
                                                     class="fa fa-edit fa-2x"></i></a>
                                             <a href="#"
-                                                onclick="confirm('Are you sure, You want to delete this category?') || event.stopImmediatePropagation()"
-                                                wire:click.prevent="delete({{ $item->id }})"
-                                                style="margin-left:10px; "><i
-                                                    class="fa fa-times fa-2x text-danger"></i></a>
+                                                onclick="confirm('Are you sure, You want to delete this attribute?') || event.stopImmediatePropagation()"
+                                                wire:click.prevent="deleteAttribute({{ $item->id }})"
+                                                class="slink"><i class="fa fa-times text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

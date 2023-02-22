@@ -7,6 +7,13 @@ use Livewire\Component;
 
 class AdminProductAttributeComponent extends Component
 {
+
+    public function deleteAttribute($id)
+    {
+        $productAttr = ProductAttribute::find($id);
+        $productAttr->delete();
+        session()->flash('message','Product Attribute has been deleted successfully!');
+    }
     public function render()
     {
         $productAttribues = ProductAttribute::paginate(5);

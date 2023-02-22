@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductAttribute extends Model
+class AttributeValue extends Model
 {
     use HasFactory;
-    public function attributeValue()
+    public function productAttribute()
     {
-        return $this->hasMany(AttributeValue::class);
+        return $this->belongsTo(ProductAttribute::class);
     }
 }

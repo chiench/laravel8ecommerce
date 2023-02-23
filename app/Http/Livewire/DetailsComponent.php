@@ -31,9 +31,15 @@ class DetailsComponent extends Component
     }
     public function store($product_id,$product_name,$product_price)
     {
+        if( !$this->sattr )
+        {
+            $this->sattr = [
+                'size' => '',
+                'colour' => '',
+            ];
+        }
 
         Cart::instance('cart')->add($product_id,$product_name,$this->qty,$product_price,0,$this->sattr)->associate('App\Models\Product');
-        dd(Cart::instance('cart')->content());
         session()->flash('success_message','Item added in Cart');
 
         return redirect()->route('product.cart');

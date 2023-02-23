@@ -94,15 +94,10 @@
                                                 <option value="{{ $item->value }}">{{ $item->value }}</option>
                                             @endforeach
                                         </select>
-
-
                                     </div>
-
                                 </div>
                             @endforeach
                         </div>
-
-
 
                         <div class="quantity">
                             <span>Quantity:</span>

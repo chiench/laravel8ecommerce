@@ -30,7 +30,7 @@ class SearchComponent extends Component
         return redirect()->route('product.cart');
     }
 
-    use WithPagination;
+
     public function render()
     {
         if($this->sorting=='date')

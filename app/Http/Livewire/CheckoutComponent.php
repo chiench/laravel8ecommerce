@@ -93,10 +93,10 @@ public function placeOrder()
 	]);
 	$order =  new Order();
 	$order->user_id = Auth::user()->id;
-	$order->subtotal = session()->get('checkout')['subtotal'];
-	$order->discount = session()->get('checkout')['discount'];
-	$order->tax = session()->get('checkout')['tax'];
-	$order->total = session()->get('checkout')['total'];
+	$order->discount = session('checkout')['discount'];
+    $order->subtotal = session('checkout')['subtotal'];
+    $order->tax = session('checkout')['tax'];
+    $order->total = session('checkout')['total'];
 	$order->firstname = $this->firstname;
 	$order->lastname = $this->lastname;
 	$order->email = $this->email;
@@ -118,6 +118,11 @@ public function placeOrder()
 		$orderItem->product_id = $item->id;
             $orderItem->order_id = $order->id;
             $orderItem->price = $item->price;
+            if($item->options){
+                $orderItem->options = serialize($item->options);
+            }
+
+
             $orderItem->quantity = $item->qty;
             $orderItem->save();
 
@@ -148,6 +153,10 @@ public function placeOrder()
             $shipping->city = $this->s_city;
             $shipping->province = $this->s_province;
             $shipping->country = $this->s_country;
+             $shipping->discount = session('checkout')['discount'];
+            $shipping->subtotal = session('checkout')['subtotal'];
+            $shipping->tax = session('checkout')['tax'];
+            $shipping->total = session('checkout')['total'];
             $shipping->zipcode = $this->s_zipcode;
             $shipping->save();
         }
@@ -167,9 +176,21 @@ public function placeOrder()
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
     }
+    public function verifyForCheckOut()
+    {
+
+        if (!Auth::user()) {
+            return redirect()->route('login');
+        } elseif ($this->thankyou) {
+            return redirect()->route('thankyou');
+        } elseif (!session()->get('checkout')) {
+            return redirect()->route('shop');
+        }
+    }
 
     public function render()
     {
+        $this->verifyForCheckOut();
         //  dd(Cart::instance('cart'),session('checkout'),22222);
         return view('livewire.checkout-component')->layout('layouts.base');
     }

@@ -19,7 +19,7 @@
                     @if (Cart::instance('cart')->count() > 0)
                         <h3 class="box-title">Products Name</h3>
                         <ul class="products-cart">
-                            @foreach (Cart::instance('cart')->content() as $item)
+                            @foreach (Cart::instance('cart')->content() as $key => $item)
                                 <li class="pr-cart-item">
                                     <div class="product-image">
                                         <figure><img src="{{ 'assets/images/products' }}/{{ $item->model->image }}"
@@ -30,12 +30,16 @@
                                             href="{{ route('product.details', ['slug' => $item->model->slug]) }}">{{ $item->model->name }}</a>
                                     </div>
 
-                                    @foreach ($item->options as $key => $op)
-                                        <div style="vertical-align: middle; width: 180px">
-                                            <p><b>{{ $key }} : {{ $op }}</b></p>
+                                    @if ($item->options->size !== '')
+                                        @foreach ($item->options as $key => $op)
+                                            <div style="vertical-align: middle; width: 180px">
+                                                <p><b>{{ $key }} : {{ $op }}</b></p>
 
-                                        </div>
-                                    @endforeach
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+
                                     <div class="price-field produtc-price">
                                         <p class="price">${{ $item->model->regular_price }}</p>
                                     </div>

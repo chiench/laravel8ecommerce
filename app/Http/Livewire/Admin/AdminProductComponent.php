@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class AdminProductComponent extends Component
 {
-    use WithPagination;
+
 
     public function deleteProduct($id)
     {

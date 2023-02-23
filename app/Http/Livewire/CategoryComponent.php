@@ -28,7 +28,7 @@ class CategoryComponent extends Component
         return redirect()->route('product.cart');
     }
 
-    use WithPagination;
+
     public function render()
     {
         $category = Category::where('slug',$this->category_slug)->first();

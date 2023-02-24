@@ -71,8 +71,9 @@ class ShopComponent extends Component
 
             $categories = Category::all();
             $witems = Cart::instance('wishlist')->content();
+            $productAll = Product::all();
 
-            return view('livewire.shop-component', [ 'witems' => $witems,'products'=> $products,'categories'=>$categories])->layout("layouts.base");
+            return view('livewire.shop-component', [ 'witems' => $witems,'productAll'=> $productAll ,'products'=> $products,'categories'=>$categories])->layout("layouts.base");
         }
     }
 }

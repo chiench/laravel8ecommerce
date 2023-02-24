@@ -74,6 +74,7 @@ Route::get('/search',SearchComponent::class)->name('product.search');
 Route::get('/contact-us',ContactComponent::class)->name('contact');
 
 Route::get('/thank-you',ThankyouComponnent::class)->name('thankyou');
+Route::get('/send-mail',[ThankyouComponnent::class,'sendMail'])->name('send.mail');
 
 // Route for Admin
 Route::middleware([
@@ -84,6 +85,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('/admin/dashboard',AdminDashboardComponent::class)->name('admin.dashboard');
+    Route::get('/admin/dashboard/generate-pdf', [AdminDashboardComponent::class, 'generatePDF'])->name('generate-pdf');
     Route::get('/admin/categories',AdminCategoryComponent::class)->name('admin.categories');
     Route::get('/admin/category/add',AdminAddCategoryComponent::class)->name('admin.addcategory');
     Route::get('/admin/category/edit/{category_slug}/{scategory_slug?}',AdminEditCategoryComponent::class)->name('admin.editcategory');

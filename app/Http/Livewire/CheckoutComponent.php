@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Shipping;
@@ -9,6 +10,7 @@ use App\Models\Transaction;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class CheckoutComponent extends Component
@@ -72,6 +74,18 @@ public function updated($fields)
 	}
 
 }
+public function sendOrderConfirmationMail($order)
+    {
+        Mail::send('mail.order-mail', ['order' => $order], function ($message)  {
+            $message->from('quangminhb53@gmail.com', ' Owenr Shop Chien Handsome');
+
+            $message->to('nguyenchienb53@gmail.com', );
+
+            $message->subject('Order Comfirmation');
+
+
+        });
+    }
 public function makeTransaction($order_id,$status)
 {
     $transaction = new Transaction();
@@ -233,6 +247,7 @@ public function placeOrder()
                 $this->thankyou = 0;
             }
         }
+        $this->sendOrderConfirmationMail($order);
     }
 
     public function resetCart()

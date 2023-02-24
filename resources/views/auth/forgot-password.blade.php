@@ -19,7 +19,19 @@
                                         {{ session('status') }}
                                     </div>
                                 @endif
-                                <x-jet-validation-errors class="mb-4" />
+                                @if ($errors->any())
+                                    <div>
+                                        <div class="font-medium error-text-validation">
+                                            {{ __('Whoops! Something went wrong.') }}
+                                        </div>
+
+                                        <ul class="mt-3 list-disc list-inside text-sm error-text-validation">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <form name="frm-login" method="POST" action="{{ route('password.email') }}">
                                     @csrf
                                     <fieldset class="wrap-title">

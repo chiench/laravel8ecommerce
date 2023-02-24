@@ -69,6 +69,7 @@ class UserEditProfileComponent extends Component
 
     public function render()
     {
-        return view('livewire.user.user-edit-profile-component')->layout('layouts.base');
+        $user = User::find(Auth::user()->id);
+        return view('livewire.user.user-edit-profile-component',compact('user'))->layout('layouts.base');
     }
 }

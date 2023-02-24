@@ -53,7 +53,7 @@
                             <ul>
                                 <li class="menu-item">
                                     <a title="Hotline: (+123) 456 789" href="#"><span
-                                            class="icon label-before fa fa-mobile"></span>Hotline: (+123) 456 789</a>
+                                            class="icon label-before fa fa-mobile"></span>Hotline: (+84) 366647272</a>
                                 </li>
                             </ul>
                         </div>
@@ -76,7 +76,8 @@
                                                     </li>
                                                     <li class="menu-item">
                                                         <a title="Categories"
-                                                            href="{{ route('admin.product_attributes') }}">Product Attribute</a>
+                                                            href="{{ route('admin.product_attributes') }}">Product
+                                                            Attribute</a>
                                                     </li>
                                                     <li class="menu-item">
                                                         <a title="All Products" href="{{ route('admin.products') }}">All
@@ -168,45 +169,7 @@
                                     @endif
 
 
-                                    <li class="menu-item lang-menu menu-item-has-children parent">
-                                        <a title="English" href="#"><span class="img label-before"><img
-                                                    src="{{ asset('assets/images/lang-en.png') }}"
-                                                    alt="lang-en"></span>English<i class="fa fa-angle-down"
-                                                aria-hidden="true"></i></a>
-                                        <ul class="submenu lang">
-                                            <li class="menu-item"><a title="hungary" href="#"><span
-                                                        class="img label-before"><img
-                                                            src="{{ asset('assets/images/lang-hun.png') }}"
-                                                            alt="lang-hun"></span>Hungary</a></li>
-                                            <li class="menu-item"><a title="german" href="#"><span
-                                                        class="img label-before"><img
-                                                            src="{{ asset('assets/images/lang-ger.png') }}"
-                                                            alt="lang-ger"></span>German</a></li>
-                                            <li class="menu-item"><a title="french" href="#"><span
-                                                        class="img label-before"><img
-                                                            src="{{ asset('assets/images/lang-fra.png') }}"
-                                                            alt="lang-fre"></span>French</a></li>
-                                            <li class="menu-item"><a title="canada" href="#"><span
-                                                        class="img label-before"><img
-                                                            src="{{ asset('assets/images/lang-can.png') }}"
-                                                            alt="lang-can"></span>Canada</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item menu-item-has-children parent">
-                                        <a title="Dollar (USD)" href="#">Dollar (USD)<i class="fa fa-angle-down"
-                                                aria-hidden="true"></i></a>
-                                        <ul class="submenu curency">
-                                            <li class="menu-item">
-                                                <a title="Pound (GBP)" href="#">Pound (GBP)</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a title="Euro (EUR)" href="#">Euro (EUR)</a>
-                                            </li>
-                                            <li class="menu-item">
-                                                <a title="Dollar (USD)" href="#">Dollar (USD)</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -243,19 +206,7 @@
                     <div class="nav-section header-sticky">
                         <div class="header-nav-section">
                             <div class="container">
-                                <ul class="nav menu-nav clone-main-menu" id="mercado_haead_menu"
-                                    data-menuname="Sale Info">
-                                    <li class="menu-item"><a href="#" class="link-term">Weekly Featured</a><span
-                                            class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Hot Sale items</a><span
-                                            class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Top new items</a><span
-                                            class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Top Selling</a><span
-                                            class="nav-label hot-label">hot</span></li>
-                                    <li class="menu-item"><a href="#" class="link-term">Top rated items</a><span
-                                            class="nav-label hot-label">hot</span></li>
-                                </ul>
+
                             </div>
                         </div>
 

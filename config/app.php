@@ -182,7 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
-        // Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -214,7 +214,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
-        // 'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

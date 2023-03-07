@@ -126,6 +126,7 @@ Route::middleware([
 // For User
 Route::middleware(['auth:sanctum','verified'])->group(function(){
 
+    Route::get('/user/dashboard/generate-pdf', [UserDashboardComponent::class, 'generatePDF'])->name('user-generate-pdf');
 
     Route::get('/user/dashboard',UserDashboardComponent::class)->name('user.dashboard');
 

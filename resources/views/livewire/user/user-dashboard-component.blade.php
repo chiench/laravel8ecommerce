@@ -60,6 +60,19 @@
     </style>
     <div class="container">
         <div class="row">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{ route('user-generate-pdf') }}" class="btn btn-success pull-right">Xuất báo
+                            cáo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-3 col-sm-6">
                 <div class="icon-stat">
                     <div class="row">

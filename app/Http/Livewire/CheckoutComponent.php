@@ -15,7 +15,6 @@ use Livewire\Component;
 
 class CheckoutComponent extends Component
 {
-    public $ship_to_different;
 public $firstname;
 public $lastname;
 public $email;
@@ -26,6 +25,7 @@ public $city;
 public $province;
 public $country;
 public $zipcode;
+public $ship_to_different;
 public $s_firstname;
 public $s_lastname;
 public $s_email;
@@ -173,10 +173,10 @@ public function placeOrder()
             $shipping->city = $this->s_city;
             $shipping->province = $this->s_province;
             $shipping->country = $this->s_country;
-             $shipping->discount = session('checkout')['discount'];
-            $shipping->subtotal = session('checkout')['subtotal'];
-            $shipping->tax = session('checkout')['tax'];
-            $shipping->total = session('checkout')['total'];
+            //  $shipping->discount = session('checkout')['discount'];
+            // $shipping->subtotal = session('checkout')['subtotal'];
+            // $shipping->tax = session('checkout')['tax'];
+            // $shipping->total = session('checkout')['total'];
             $shipping->zipcode = $this->s_zipcode;
             $shipping->save();
         }
@@ -252,9 +252,9 @@ public function placeOrder()
 
     public function resetCart()
     {
-        $this->thankyou = 1;
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
+        $this->thankyou = 1;
     }
     public function verifyForCheckOut()
     {

@@ -79,12 +79,23 @@
                         <div class="summary">
                             <div class="order-summary">
                                 <h4 class="title-box">Order Summary</h4>
-                                <p class="summary-info"><span class="title">Subtotal</span><b
-                                        class="index">${{ $order->subtotal }}</b></p>
-                                <p class="summary-info"><span class="title">Tax</span><b
-                                        class="index">${{ $order->tax }}</b></p>
-                                <p class="summary-info"><span class="title">Shipping</span><b class="index">Free
-                                        Shipping</b></p>
+
+                                @if ($order->discount > 0)
+                                    <p class="summary-info"><span class="title">Discount</span><b class="index">-
+                                            ${{ $order->discount }}</b></p>
+                                    <p class="summary-info"><span class="title">Discounted Subtotal </span><b
+                                            class="index">${{ $order->subtotal }}</b></p>
+                                    <p class="summary-info"><span class="title">Tax</span><b
+                                            class="index">${{ $order->tax }}</b></p>
+                                @else
+                                    <p class="summary-info"><span class="title">Subtotal</span><b
+                                            class="index">${{ $order->subtotal }}</b></p>
+                                    <p class="summary-info"><span class="title">Tax</span><b
+                                            class="index">${{ $order->tax }}</b></p>
+                                    <p class="summary-info"><span class="title">Shipping</span><b class="index">Free
+                                            Shipping</b></p>
+                                @endif
+
                                 <p class="summary-info"><span class="title">Total</span><b
                                         class="index">${{ $order->total }}</b></p>
                             </div>

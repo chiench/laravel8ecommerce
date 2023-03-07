@@ -100,7 +100,8 @@ class CartComponent extends Component
         } else {
             $this->subtotalAfterDiscount = (Cart::instance('cart')->subtotal() * session()->get('coupon')['value']) / 100;
         }
-        $this->taxAfterDiscount =  ($this->subtotalAfterDiscount * Cart::tax()) / 100;
+        $this->taxAfterDiscount =  ($this->subtotalAfterDiscount * config('cart.tax')) / 100;
+
         $this->totalAfterDiscount = $this->subtotalAfterDiscount + $this->taxAfterDiscount;
 
     }
@@ -144,7 +145,7 @@ class CartComponent extends Component
 
                 session()->forget('coupon');
             } else {
-                $this->handleCouponValid();
+                $this->calculateDiscounts();
             }
         }
         $products = Cart::instance('cart')->content();
